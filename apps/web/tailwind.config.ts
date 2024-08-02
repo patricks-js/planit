@@ -1,11 +1,9 @@
-// tailwind config is required for editor support
-
+import sharedConfig from "@planit/tailwind";
 import type { Config } from "tailwindcss";
-import sharedConfig from "@repo/tailwind-config";
 
 const config: Pick<Config, "content" | "presets"> = {
-  content: ["./src/app/**/*.tsx"],
-  presets: [sharedConfig],
+  content: ["./src/**/*.{js,jsx,ts,tsx,mdx}"],
+  presets: [sharedConfig]
 };
 
 export default config;
