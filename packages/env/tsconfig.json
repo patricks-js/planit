@@ -1,0 +1,4 @@
+{
+  "extends": ["@planit/tsconfig/base.json"],
+  "include": ["index.ts"]
+}
