@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 export default function SignupPage() {
@@ -45,17 +46,29 @@ export default function SignupPage() {
       </div>
       <form className="space-y-4">
         <div className="flex items-center gap-4">
-          <Input placeholder="First Name" />
-          <Input placeholder="Last Name" />
+          <Label className="flex w-full flex-col items-start gap-2">
+            First Name
+            <Input placeholder="John" />
+          </Label>
+          <Label className="flex w-full flex-col items-start gap-2">
+            Last Name
+            <Input placeholder="Doe" />
+          </Label>
         </div>
-        <Input
-          placeholder="Email"
-          type="email"
-        />
-        <Input
-          placeholder="Password"
-          type="password"
-        />
+        <Label className="flex flex-col items-start gap-2">
+          Email
+          <Input
+            placeholder="your@email.com"
+            type="email"
+          />
+        </Label>
+        <Label className="flex flex-col items-start gap-2">
+          Password
+          <Input
+            placeholder="Strong password"
+            type="password"
+          />
+        </Label>
         <Button
           size="lg"
           className="w-full"
