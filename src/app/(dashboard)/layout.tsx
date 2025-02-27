@@ -10,7 +10,7 @@ export default function DashboardLayout({
       <Header />
       <main className="h-dvh">
         <Submenu />
-        <div className="px-6 py-8">{children}</div>
+        {children}
       </main>
     </>
   );
