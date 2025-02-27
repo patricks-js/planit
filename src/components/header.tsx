@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bell, Feather, UserRoundIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { SearchCommandBox } from "./search-command-box";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 
@@ -9,7 +10,7 @@ const LOGO_SIZE = 24;
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-6 pt-4 pb-2">
+    <header className="flex items-center justify-between bg-card px-6 pt-4 pb-2">
       <Link
         href="/"
         className="flex items-center gap-2"
@@ -35,7 +36,7 @@ export function Header() {
           </Badge>
         </h3>
       </Link>
-      {/* <div /> Command box */}
+      <SearchCommandBox />
       <div className="flex items-center gap-4">
         <Button>Add new</Button>
         <Button

@@ -33,7 +33,7 @@ export default function Submenu() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div className="border-b">
+    <div className="border-b bg-card">
       <nav className="px-6">
         <ul className="flex items-baseline gap-2 text-sm">
           {menuNavigation.map((item) => (
