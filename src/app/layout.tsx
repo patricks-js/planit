@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <html lang="en">
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="dark min-h-screen antialiased">{children}</body>
     </html>
   );
 }
