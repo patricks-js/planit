@@ -1,17 +1,18 @@
 "use client";
 
-import { signupAction } from "@/app/actions/signup-action";
+import { signUpAction } from "@/app/actions/signup-action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useActionState } from "react";
+import { Loader } from "lucide-react";
+import { useStateAction } from "next-safe-action/stateful-hooks";
 
 export function SignUpForm() {
-  const [state, action, isPending] = useActionState(signupAction, null);
+  const { execute, isPending } = useStateAction(signUpAction, {});
 
   return (
     <form
-      action={action}
+      action={execute}
       className="space-y-4"
     >
       <Label className="flex w-full flex-col items-start gap-2">
@@ -43,7 +44,7 @@ export function SignUpForm() {
         disabled={isPending}
         className="w-full"
       >
-        Sign up
+        {isPending ? <Loader className="animate-spin" /> : "Sign up"}
       </Button>
     </form>
   );

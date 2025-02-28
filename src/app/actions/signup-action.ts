@@ -1,24 +1,33 @@
 "use server";
 
 import { auth } from "@/lib/auth";
+import { actionClient } from "@/lib/safe-action";
 import { redirect } from "next/navigation";
+import { z } from "zod";
+import { zfd } from "zod-form-data";
 
-export async function signupAction(prevState: unknown, formData: FormData) {
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+const schema = zfd.formData({
+  name: zfd.text(z.string().min(5)),
+  email: zfd.text(z.string().email()),
+  password: zfd.text(z.string().min(8).max(100)),
+});
 
-  const response = await auth.api.signUpEmail({
-    body: {
-      name,
-      email,
-      password,
+type Credentials = z.infer<typeof schema>;
+
+export const signUpAction = actionClient
+  .schema(schema)
+  .stateAction<{ prevState?: Credentials; credentials: Credentials }>(
+    async ({ parsedInput }) => {
+      const { name, email, password } = parsedInput;
+
+      await auth.api.signUpEmail({
+        body: {
+          name,
+          email,
+          password,
+        },
+      });
+
+      redirect("/inbox");
     },
-    asResponse: true,
-  });
-
-  const data = await response.json();
-  console.log(data);
-
-  redirect("/inbox");
-}
+  );
