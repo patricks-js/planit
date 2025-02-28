@@ -1,0 +1,12 @@
+name: planit
+
+services:
+  db:
+    image: bitnami/postgresql:16
+    container_name: planit-db
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=planit_db
+    ports:
+      - 5432:5432
