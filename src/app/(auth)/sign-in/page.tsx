@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { SignInForm } from "./signin-form";
 
 export default function SigninPage() {
   return (
@@ -44,28 +43,7 @@ export default function SigninPage() {
           </span>
         </div>
       </div>
-      <form className="space-y-4">
-        <Label className="flex flex-col items-start gap-2">
-          Email
-          <Input
-            placeholder="your@email.com"
-            type="email"
-          />
-        </Label>
-        <Label className="flex flex-col items-start gap-2">
-          Password
-          <Input
-            placeholder="Strong password"
-            type="password"
-          />
-        </Label>
-        <Button
-          size="lg"
-          className="w-full"
-        >
-          Sign in
-        </Button>
-      </form>
+      <SignInForm />
       <p className="text-center text-muted-foreground text-sm">
         By signing up, you agree to our Terms & Conditions and Privacy Policy.
       </p>
