@@ -40,7 +40,7 @@ export function SearchCommandBox() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex h-9 w-fit rounded-md border border-input bg-background px-3 py-2 text-foreground text-sm shadow-xs outline-none transition-[color,box-shadow] placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+        className="inline-flex h-9 w-full rounded-md border border-input bg-card px-3 py-2 text-foreground text-sm shadow-xs outline-none transition-[color,box-shadow] placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
         <span className="flex grow items-center">
           <SearchIcon
@@ -48,7 +48,9 @@ export function SearchCommandBox() {
             size={16}
             aria-hidden="true"
           />
-          <span className="font-normal text-muted-foreground/70">Search</span>
+          <span className="font-normal text-muted-foreground/70">
+            Search or type a command
+          </span>
         </span>
         <kbd className="-me-1 ms-36 inline-flex h-5 max-h-full items-center rounded border bg-background px-1 font-[inherit] font-medium text-[0.625rem] text-muted-foreground/70">
           ⌘K

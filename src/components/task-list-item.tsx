@@ -6,11 +6,11 @@ import { Checkbox } from "./ui/checkbox";
 
 type TaskListItemProps = {
   title: string;
-  dueDate: string;
+  dueDate: Date;
 };
 
 export function TaskListItem({ title, dueDate }: TaskListItemProps) {
-  const due = formatDate(new Date(dueDate));
+  const due = formatDate(dueDate);
 
   return (
     <>
@@ -35,11 +35,11 @@ export function TaskListItem({ title, dueDate }: TaskListItemProps) {
 
 function formatDate(date: Date) {
   if (isToday(date)) {
-    return <Badge className="bg-emerald-400">Today</Badge>;
+    return <Badge className="bg-amber-400">Today</Badge>;
   }
 
   if (isYesterday(date)) {
-    return <Badge className="bg-emerald-400">Yesterday</Badge>;
+    return <Badge className="bg-rose-500 text-foreground">Yesterday</Badge>;
   }
 
   if (isTomorrow(date)) {
@@ -54,5 +54,5 @@ function formatDate(date: Date) {
     );
   }
 
-  return format(date, "iii, d MMM");
+  return <Badge variant="secondary">{format(date, "iii, d MMM")}</Badge>;
 }
