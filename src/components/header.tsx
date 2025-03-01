@@ -1,10 +1,11 @@
 import { Badge } from "@/components/ui/badge";
-import { Bell, Feather, UserRoundIcon } from "lucide-react";
+import { Feather, UserRoundIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { AddNewTask } from "./add-new-task";
 import { SearchCommandBox } from "./search-command-box";
+import { SignOutButton } from "./signout-button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-import { Button } from "./ui/button";
 
 const LOGO_SIZE = 24;
 
@@ -38,16 +39,8 @@ export function Header() {
       </Link>
       <SearchCommandBox />
       <div className="flex items-center gap-4">
-        <Button>Add new</Button>
-        <Button
-          variant="secondary"
-          className="rounded-full"
-        >
-          <Bell
-            size={16}
-            className="opacity-60"
-          />
-        </Button>
+        <AddNewTask />
+        <SignOutButton />
         <Avatar className="size-9">
           <AvatarFallback>
             <UserRoundIcon
