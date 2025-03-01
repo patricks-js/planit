@@ -15,6 +15,13 @@
       "when": 1740714081658,
       "tag": "0001_panoramic_sprite",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740801643178,
+      "tag": "0002_heavy_cassandra_nova",
+      "breakpoints": true
     }
   ]
 }

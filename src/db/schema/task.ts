@@ -9,5 +9,7 @@ export const tasks = pgTable("tasks", (t) => ({
     .notNull(),
   title: t.text().notNull(),
   completed: t.boolean().default(false),
-  dueAt: t.timestamp("due_at"),
+  dueAt: t.timestamp("due_at").notNull(),
 }));
+
+export type Task = typeof tasks.$inferSelect;
