@@ -12,22 +12,18 @@ const schema = zfd.formData({
   password: zfd.text(z.string().min(8).max(100)),
 });
 
-type Credentials = z.infer<typeof schema>;
-
 export const signUpAction = actionClient
   .schema(schema)
-  .stateAction<{ prevState?: Credentials; credentials: Credentials }>(
-    async ({ parsedInput }) => {
-      const { name, email, password } = parsedInput;
+  .stateAction(async ({ parsedInput }) => {
+    const { name, email, password } = parsedInput;
 
-      await auth.api.signUpEmail({
-        body: {
-          name,
-          email,
-          password,
-        },
-      });
+    await auth.api.signUpEmail({
+      body: {
+        name,
+        email,
+        password,
+      },
+    });
 
-      redirect("/inbox");
-    },
-  );
+    redirect("/inbox");
+  });

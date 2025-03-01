@@ -1,14 +1,14 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { actionClient } from "@/lib/safe-action";
+import { authActionClient } from "@/lib/safe-action";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const signOutAction = actionClient.action(async () => {
+export const signOutAction = authActionClient.action(async () => {
   await auth.api.signOut({
     headers: await headers(),
   });
 
-  redirect("/");
+  redirect("/sign-in");
 });
