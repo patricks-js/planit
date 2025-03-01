@@ -4,6 +4,7 @@ import {
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
+import type { z } from "zod";
 import { user } from "./auth";
 
 export const tasks = pgTable("tasks", (t) => ({
@@ -17,6 +18,13 @@ export const tasks = pgTable("tasks", (t) => ({
   dueAt: t.timestamp("due_at").notNull(),
 }));
 
-export const insertTaskSchema = createInsertSchema(tasks);
+export const insertTaskSchema = createInsertSchema(tasks).omit({
+  ownerId: true,
+});
+export type TInsertTaskSchema = z.infer<typeof insertTaskSchema>;
+
 export const selectTaskSchema = createSelectSchema(tasks);
+export type TSelectTaskSchema = z.infer<typeof selectTaskSchema>;
+
 export const updateTaskSchema = createUpdateSchema(tasks);
+export type TUpdateTaskSchema = z.infer<typeof updateTaskSchema>;
