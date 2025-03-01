@@ -1,15 +1,23 @@
 import { getSessionCookie } from "better-auth";
 import { type NextRequest, NextResponse } from "next/server";
+import { createRouteMatcher } from "./lib/utils";
 
-const authRoutes = ["/sign-in", "/sign-up"];
-
-// ! fix: enhance protected/public routes and adjust redirects
+const isProtectedRoute = createRouteMatcher([
+  "/inbox",
+  "/today",
+  "/someday",
+  "/completed",
+  "/projects",
+]);
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
-  const pathname = request.nextUrl.pathname;
 
-  if (sessionCookie && authRoutes.some((route) => route === pathname)) {
+  if (!sessionCookie && isProtectedRoute(request)) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (sessionCookie && !isProtectedRoute(request)) {
     return NextResponse.redirect(new URL("/inbox", request.url));
   }
 
@@ -17,5 +25,10 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/inbox", ...authRoutes],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    // Always run for API routes
+    "/(api|trpc)(.*)",
+  ],
 };
