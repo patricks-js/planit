@@ -22,6 +22,13 @@
       "when": 1740801643178,
       "tag": "0002_heavy_cassandra_nova",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1740864004920,
+      "tag": "0003_nice_gideon",
+      "breakpoints": true
     }
   ]
 }
