@@ -1,11 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import { Feather, UserRoundIcon } from "lucide-react";
+import { Feather } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { AddNewTask } from "./add-new-task";
-import { SearchCommandBox } from "./search-command-box";
-import { SignOutButton } from "./signout-button";
-import { Avatar, AvatarFallback } from "./ui/avatar";
+import { ProfileMenu } from "./profile-menu";
 
 const LOGO_SIZE = 24;
 
@@ -37,19 +34,9 @@ export function Header() {
           </Badge>
         </h3>
       </Link>
-      <SearchCommandBox />
       <div className="flex items-center gap-4">
-        <AddNewTask />
-        <SignOutButton />
-        <Avatar className="size-9">
-          <AvatarFallback>
-            <UserRoundIcon
-              size={16}
-              className="opacity-60"
-              aria-hidden="true"
-            />
-          </AvatarFallback>
-        </Avatar>
+        {/* TODO: Notification popover */}
+        <ProfileMenu />
       </div>
     </header>
   );
