@@ -1,6 +1,7 @@
 "use client";
 
 import { createTaskAction } from "@/app/actions/create-task-action";
+import { Plus } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { Button } from "./ui/button";
 import {
@@ -18,7 +19,10 @@ export function CreateTaskForm() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>New task</Button>
+        <Button>
+          <Plus className="size-5" />
+          <span className="hidden md:inline">New task</span>
+        </Button>
       </DialogTrigger>
       <DialogContent className="w-[382px]">
         <form
