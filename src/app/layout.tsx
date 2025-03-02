@@ -1,6 +1,13 @@
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { Geist } from "next/font/google";
 import type { PropsWithChildren } from "react";
 import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -10,7 +17,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <html lang="en">
-      <body className="dark min-h-screen antialiased">{children}</body>
+      <body
+        className={cn(
+          "dark relative min-h-screen w-screen font-sans antialiased",
+          geistSans.variable,
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
