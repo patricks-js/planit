@@ -1,6 +1,11 @@
+"use client";
+
+import { markAsComplete } from "@/app/actions/mark-as-complete";
 import type { TSelectTaskSchema } from "@/db/schema";
 import { format, isBefore, isToday, isTomorrow, isYesterday } from "date-fns";
 import { Trash2 } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
+import { useState } from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
@@ -11,11 +16,31 @@ type TaskListItemProps = {
 
 export function TaskListItem({ task }: TaskListItemProps) {
   const due = formatDate(task.dueAt);
+  const [checked, setChecked] = useState(task.completed);
+  const { execute } = useAction(markAsComplete, {
+    onSuccess: () => {
+      console.log("success");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
+  function handleComplete() {
+    setChecked(!checked);
+    execute({
+      taskId: task.id,
+    });
+  }
 
   return (
     <div className="group flex items-center justify-between gap-4 rounded-md bg-card px-4 py-2 shadow-sm">
       <div className="flex items-center gap-4">
-        <Checkbox className="size-4 md:size-5" />
+        <Checkbox
+          checked={checked}
+          onCheckedChange={handleComplete}
+          className="size-4 md:size-5"
+        />
         <p className="font-medium leading-loose">{task.title}</p>
       </div>
       <div className="flex items-center gap-2">
