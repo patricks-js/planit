@@ -6,6 +6,7 @@ import { format, isBefore, isToday, isTomorrow, isYesterday } from "date-fns";
 import { Trash2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
@@ -19,10 +20,12 @@ export function TaskListItem({ task }: TaskListItemProps) {
   const [checked, setChecked] = useState(task.completed);
   const { execute } = useAction(markAsComplete, {
     onSuccess: () => {
-      console.log("success");
+      toast.success("💪 Isso foi fácil, né? Próxima!", {
+        // TODO: Add undo action
+      });
     },
     onError: () => {
-      console.log("error");
+      toast.error("Algo deu errado, tente novamente.");
     },
   });
 

@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
         )}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
