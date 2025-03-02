@@ -11,16 +11,10 @@ export function TaskList({ tasks }: TaskListProps) {
   return (
     <>
       {tasks.length > 0 ? (
-        <ul className="space-y-4">
+        <ul className="space-y-2">
           {tasks.map((task) => (
-            <li
-              key={task.title}
-              className="flex items-center justify-between gap-8 rounded-md bg-card px-4 py-2"
-            >
-              <TaskListItem
-                title={task.title}
-                dueDate={task.dueAt}
-              />
+            <li key={task.id}>
+              <TaskListItem task={task} />
             </li>
           ))}
         </ul>

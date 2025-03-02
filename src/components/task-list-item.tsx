@@ -1,35 +1,32 @@
+import type { TSelectTaskSchema } from "@/db/schema";
 import { format, isBefore, isToday, isTomorrow, isYesterday } from "date-fns";
-import { EllipsisVertical } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 
 type TaskListItemProps = {
-  title: string;
-  dueDate: Date;
+  task: TSelectTaskSchema;
 };
 
-export function TaskListItem({ title, dueDate }: TaskListItemProps) {
-  const due = formatDate(dueDate);
+export function TaskListItem({ task }: TaskListItemProps) {
+  const due = formatDate(task.dueAt);
 
   return (
-    <>
-      <div className="flex w-full items-center justify-between gap-4 rounded-md bg-card p-1 shadow-sm">
-        <div className="flex items-center gap-4">
-          <Checkbox className="size-4 md:size-5" />
-          <p className="font-medium leading-loose">{title}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          {due}
-          <Button
-            size="icon"
-            variant="ghost"
-          >
-            <EllipsisVertical className="size-4" />
-          </Button>
-        </div>
+    <div className="group flex items-center justify-between gap-4 rounded-md bg-card px-4 py-2 shadow-sm">
+      <div className="flex items-center gap-4">
+        <Checkbox className="size-4 md:size-5" />
+        <p className="font-medium leading-loose">{task.title}</p>
       </div>
-    </>
+      <div className="flex items-center gap-2">
+        <Button
+          size="icon"
+          variant="ghost"
+        >
+          <Trash2 className="invisible size-4 translate-x-1 opacity-60 transition-transform duration-200 group-hover:visible group-hover:translate-x-0" />
+        </Button>
+      </div>
+    </div>
   );
 }
 
