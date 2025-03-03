@@ -5,29 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1740709759422,
-      "tag": "0000_silly_colossus",
+      "when": 1741011625325,
+      "tag": "0000_common_silver_surfer",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1740714081658,
-      "tag": "0001_panoramic_sprite",
+      "when": 1741011785912,
+      "tag": "0001_freezing_nomad",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "7",
-      "when": 1740801643178,
-      "tag": "0002_heavy_cassandra_nova",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1740864004920,
-      "tag": "0003_nice_gideon",
+      "when": 1741012149121,
+      "tag": "0002_kind_abomination",
       "breakpoints": true
     }
   ]

@@ -1,6 +1,6 @@
 {
-  "id": "18a6e016-5ccf-46c8-afd1-27d55d6e0b19",
-  "prevId": "bf4a902f-2803-45fe-a019-f4f1eb40ef85",
+  "id": "8c69ba56-d581-4fe4-884c-d55406808011",
+  "prevId": "676f41f1-d0fd-4ec6-a610-9ed3259c9b82",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -198,12 +198,23 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "tasks_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
-        "ownerId": {
-          "name": "ownerId",
+        "userId": {
+          "name": "userId",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -214,28 +225,49 @@
           "primaryKey": false,
           "notNull": true
         },
-        "completed": {
-          "name": "completed",
-          "type": "boolean",
+        "description": {
+          "name": "description",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "default": false
+          "notNull": false
         },
-        "due_at": {
-          "name": "due_at",
+        "status": {
+          "name": "status",
+          "type": "task_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'todo'"
+        },
+        "dueDate": {
+          "name": "dueDate",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "tasks_ownerId_user_id_fk": {
-          "name": "tasks_ownerId_user_id_fk",
+        "tasks_userId_user_id_fk": {
+          "name": "tasks_userId_user_id_fk",
           "tableFrom": "tasks",
           "tableTo": "user",
           "columnsFrom": [
-            "ownerId"
+            "userId"
           ],
           "columnsTo": [
             "id"
@@ -363,7 +395,17 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.task_status": {
+      "name": "task_status",
+      "schema": "public",
+      "values": [
+        "todo",
+        "inProgress",
+        "done"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},

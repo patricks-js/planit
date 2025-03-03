@@ -1,25 +1,32 @@
-import { pgTable } from "drizzle-orm/pg-core";
+import { pgEnum, pgTable } from "drizzle-orm/pg-core";
 import {
   createInsertSchema,
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
 import type { z } from "zod";
+
 import { user } from "./auth";
 
+// TODO: add priority based on the Eisenhower matrix
+export const statusEnum = pgEnum("task_status", ["todo", "inProgress", "done"]);
+
 export const tasks = pgTable("tasks", (t) => ({
-  id: t.serial().primaryKey().notNull(),
-  ownerId: t
+  id: t.integer().generatedAlwaysAsIdentity().primaryKey().notNull(),
+  userId: t
     .text()
     .references(() => user.id, { onDelete: "cascade" })
     .notNull(),
   title: t.text().notNull(),
-  completed: t.boolean().default(false).notNull(),
-  dueAt: t.timestamp("due_at").notNull(),
+  description: t.text(),
+  status: statusEnum().default("todo").notNull(),
+  dueDate: t.timestamp(),
+  createdAt: t.timestamp().defaultNow().notNull(),
+  updatedAt: t.timestamp().defaultNow().notNull(),
 }));
 
 export const insertTaskSchema = createInsertSchema(tasks).omit({
-  ownerId: true,
+  userId: true,
 });
 export type TInsertTaskSchema = z.infer<typeof insertTaskSchema>;
 
