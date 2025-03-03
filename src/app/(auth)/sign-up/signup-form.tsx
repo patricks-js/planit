@@ -1,6 +1,7 @@
 "use client";
 
 import { signUpAction } from "@/app/actions/signup-action";
+import { TextShine } from "@/components/text-shine";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -44,7 +45,14 @@ export function SignUpForm() {
         disabled={isPending}
         className="w-full"
       >
-        {isPending ? <Loader className="animate-spin" /> : "Sign up"}
+        {isPending ? (
+          <>
+            <Loader className="animate-spin" />
+            <TextShine as="span">Creating your account...</TextShine>
+          </>
+        ) : (
+          "Sign up"
+        )}
       </Button>
     </form>
   );

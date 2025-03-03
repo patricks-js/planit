@@ -1,6 +1,7 @@
 "use client";
 
 import { signInAction } from "@/app/actions/signin-action";
+import { TextShine } from "@/components/text-shine";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,7 +37,14 @@ export function SignInForm() {
         disabled={isPending}
         className="w-full"
       >
-        {isPending ? <Loader className="animate-spin" /> : "Sign in"}
+        {isPending ? (
+          <>
+            <Loader className="animate-spin" />
+            <TextShine as="span">Logging in...</TextShine>
+          </>
+        ) : (
+          "Sign in"
+        )}
       </Button>
     </form>
   );
