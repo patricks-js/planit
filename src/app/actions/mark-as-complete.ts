@@ -19,9 +19,9 @@ export const markAsComplete = authActionClient
     await db
       .update(tasks)
       .set({
-        completed: true,
+        status: "done",
       })
-      .where(and(eq(tasks.id, taskId), eq(tasks.ownerId, userId)));
+      .where(and(eq(tasks.id, taskId), eq(tasks.userId, userId)));
 
     revalidatePath("/(dashboard)/", "layout");
   });

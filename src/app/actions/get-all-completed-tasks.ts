@@ -18,7 +18,7 @@ export async function getAllCompletedTasks() {
   const completedTasks = await db
     .select()
     .from(tasks)
-    .where(and(eq(tasks.ownerId, session.user.id), tasks.completed));
+    .where(and(eq(tasks.userId, session.user.id), eq(tasks.status, "done")));
 
   return {
     completedTasks,

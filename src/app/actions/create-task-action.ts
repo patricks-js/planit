@@ -21,15 +21,15 @@ export const createTaskAction = authActionClient
       .insert(tasks)
       .values({
         title,
-        dueAt,
-        ownerId: ctx.userId,
+        dueDate: dueAt,
+        userId: ctx.userId,
       })
       .returning({
         id: tasks.id,
         title: tasks.title,
-        dueAt: tasks.dueAt,
-        completed: tasks.completed,
-        ownerId: tasks.ownerId,
+        dueAt: tasks.dueDate,
+        status: tasks.status,
+        userId: tasks.userId,
       });
 
     revalidatePath("/inbox");

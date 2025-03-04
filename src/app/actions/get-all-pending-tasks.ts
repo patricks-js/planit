@@ -18,7 +18,9 @@ export async function getAllPendingTasks() {
   const userTasks = await db
     .select()
     .from(tasks)
-    .where(and(eq(tasks.ownerId, session.user.id), not(tasks.completed)));
+    .where(
+      and(eq(tasks.userId, session.user.id), not(eq(tasks.status, "done"))),
+    );
 
   return {
     userTasks,

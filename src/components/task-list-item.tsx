@@ -2,12 +2,10 @@
 
 import { markAsComplete } from "@/app/actions/mark-as-complete";
 import type { TSelectTaskSchema } from "@/db/schema";
-import { format, isBefore, isToday, isTomorrow, isYesterday } from "date-fns";
 import { Trash2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 
@@ -16,8 +14,7 @@ type TaskListItemProps = {
 };
 
 export function TaskListItem({ task }: TaskListItemProps) {
-  const due = formatDate(task.dueAt);
-  const [checked, setChecked] = useState(task.completed);
+  const [checked, setChecked] = useState(task.status === "done");
   const { execute } = useAction(markAsComplete, {
     onSuccess: () => {
       toast.success("💪 Isso foi fácil, né? Próxima!", {
@@ -56,28 +53,4 @@ export function TaskListItem({ task }: TaskListItemProps) {
       </div>
     </div>
   );
-}
-
-function formatDate(date: Date) {
-  if (isToday(date)) {
-    return <Badge className="bg-amber-400">Today</Badge>;
-  }
-
-  if (isYesterday(date)) {
-    return <Badge className="bg-rose-500 text-foreground">Yesterday</Badge>;
-  }
-
-  if (isTomorrow(date)) {
-    return <Badge className="bg-emerald-400">Tomorrow</Badge>;
-  }
-
-  if (isBefore(date, new Date())) {
-    return (
-      <Badge className="bg-rose-500/40 text-primary">
-        {format(date, "iii, d MMM")}
-      </Badge>
-    );
-  }
-
-  return <Badge variant="secondary">{format(date, "iii, d MMM")}</Badge>;
 }
