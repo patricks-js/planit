@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { AuthFormFooter } from "@/features/auth/components/auth-form-footer";
 import { SignInForm } from "@/features/auth/components/sign-in-form";
-import { SocialAuthButtons } from "@/features/auth/components/social-auth-buttons";
 
 export default function SigninPage() {
   return (
@@ -22,7 +21,6 @@ export default function SigninPage() {
         </p>
       </header>
       <SignInForm />
-      <SocialAuthButtons />
       <AuthFormFooter />
     </div>
   );
