@@ -1,9 +1,12 @@
-import { SignInForm } from "@/features/auth/components/sign-in-form";
 import Link from "next/link";
+
+import { AuthFormFooter } from "@/features/auth/components/auth-form-footer";
+import { SignInForm } from "@/features/auth/components/sign-in-form";
+import { SocialAuthButtons } from "@/features/auth/components/social-auth-buttons";
 
 export default function SigninPage() {
   return (
-    <div className="max-w-md flex-1 space-y-8">
+    <div className="max-w-md flex-1 space-y-6">
       <header className="space-y-1 text-center">
         <h2 className="font-bold text-3xl leading-relaxed tracking-tight">
           Bem-vindo de volta!
@@ -19,6 +22,8 @@ export default function SigninPage() {
         </p>
       </header>
       <SignInForm />
+      <SocialAuthButtons />
+      <AuthFormFooter />
     </div>
   );
 }

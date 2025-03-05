@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { SignUpForm } from "./signup-form";
+
+import { AuthFormFooter } from "@/features/auth/components/auth-form-footer";
+import { SignUpForm } from "@/features/auth/components/sign-up-form";
 
 export default function SignupPage() {
   return (
@@ -19,6 +21,7 @@ export default function SignupPage() {
         </p>
       </header>
       <SignUpForm />
+      <AuthFormFooter />
     </div>
   );
 }
