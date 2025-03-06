@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body
         className={cn(
-          "dark relative min-h-screen w-screen font-sans antialiased",
+          "dark relative min-h-screen w-screen overflow-hidden font-sans antialiased",
           geistSans.variable,
         )}
       >
