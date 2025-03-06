@@ -1,8 +1,10 @@
 "use client";
 
-import { createTaskAction } from "@/app/actions/create-task-action";
 import { Plus } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
+
+import { createTaskAction } from "@/app/actions/create-task-action";
+import { DatePicker } from "./date-picker";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -12,6 +14,8 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { Textarea } from "./ui/textarea";
 
 export function CreateTaskForm() {
   const { execute } = useAction(createTaskAction);
@@ -24,23 +28,37 @@ export function CreateTaskForm() {
           <span className="hidden md:inline">New task</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[382px]">
+      <DialogContent className="p-4">
         <form
           action={execute}
-          className="mt-4 space-y-5"
+          className="space-y-5 p-4"
         >
           <div className="space-y-2">
+            <Label htmlFor="title">Título</Label>
             <Input
+              id="title"
               name="title"
-              type="text"
-              placeholder="Task title"
-            />
-            <Input
-              name="dueAt"
-              type="date"
+              placeholder="Título da tarefa"
             />
           </div>
-          <DialogFooter className="ml-auto">
+          <div className="space-y-2">
+            <Label htmlFor="description">
+              Description{" "}
+              <span className="text-muted-foreground text-sm leading-0">
+                (opcional)
+              </span>
+            </Label>
+            <Textarea
+              id="description"
+              name="description"
+              placeholder="Descrição da tarefa"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="dueDate">Data de vencimento</Label>
+            <DatePicker name="dueDate" />
+          </div>
+          <DialogFooter className="flex flex-row justify-end p-0">
             <DialogClose asChild>
               <Button
                 type="button"

@@ -9,19 +9,21 @@ import { zfd } from "zod-form-data";
 
 const schema = zfd.formData({
   title: zfd.text(z.string().min(3)),
-  dueAt: zfd.text(z.coerce.date()),
+  description: zfd.text(z.coerce.string()).optional(),
+  dueDate: zfd.text(z.coerce.date()),
 });
 
 export const createTaskAction = authActionClient
   .schema(schema)
   .action(async ({ parsedInput, ctx }) => {
-    const { title, dueAt } = parsedInput;
+    const { title, description, dueDate } = parsedInput;
 
     const [task] = await db
       .insert(tasks)
       .values({
         title,
-        dueDate: dueAt,
+        description: description,
+        dueDate: dueDate,
         userId: ctx.userId,
       })
       .returning({
@@ -32,7 +34,7 @@ export const createTaskAction = authActionClient
         userId: tasks.userId,
       });
 
-    revalidatePath("/inbox");
+    revalidatePath("/(dashboard)/", "layout");
 
     return { task };
   });
