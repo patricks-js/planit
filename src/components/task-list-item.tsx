@@ -1,12 +1,14 @@
 "use client";
 
-import { markAsComplete } from "@/app/actions/mark-as-complete";
-import type { TSelectTaskSchema } from "@/db/schema";
-import { Trash2 } from "lucide-react";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { CalendarDays } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Button } from "./ui/button";
+
+import { markAsComplete } from "@/app/actions/mark-as-complete";
+import type { TSelectTaskSchema } from "@/db/schema";
 import { Checkbox } from "./ui/checkbox";
 
 type TaskListItemProps = {
@@ -34,22 +36,26 @@ export function TaskListItem({ task }: TaskListItemProps) {
   }
 
   return (
-    <div className="group flex items-center justify-between gap-4 rounded-md bg-card px-4 py-2 shadow-sm">
-      <div className="flex items-center gap-4">
-        <Checkbox
-          checked={checked}
-          onCheckedChange={handleComplete}
-          className="size-4 md:size-5"
-        />
-        <p className="font-medium leading-loose">{task.title}</p>
-      </div>
-      <div className="flex items-center gap-2">
-        <Button
-          size="icon"
-          variant="ghost"
-        >
-          <Trash2 className="invisible size-4 translate-x-1 opacity-60 transition-transform duration-200 group-hover:visible group-hover:translate-x-0" />
-        </Button>
+    <div className="flex items-center gap-4 px-4 py-2">
+      <Checkbox
+        checked={checked}
+        onCheckedChange={handleComplete}
+        className="size-4 md:size-5"
+      />
+      <div className="grid gap-2">
+        <h4 className="font-medium leading-tight">{task.title}</h4>
+        <div className="flex items-center gap-2 text-muted-foreground text-sm">
+          {task.description && (
+            <p className="line-clamp-1">{task.description}</p>
+          )}
+          {task.dueDate && task.description ? <span>•</span> : null}
+          {task.dueDate && (
+            <span className="inline-flex shrink-0 items-center gap-1">
+              <CalendarDays className="size-4 opacity-80" />
+              <span>{format(task.dueDate, "PP", { locale: ptBR })}</span>
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

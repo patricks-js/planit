@@ -49,7 +49,7 @@ export async function ProfileMenu({ userInfo }: ProfileMenuProps) {
           aria-hidden="true"
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="max-w-">
+      <DropdownMenuContent align="end">
         <DropdownMenuLabel className="flex min-w-0 flex-col">
           <span className="truncate font-medium text-foreground text-sm">
             {userInfo.name}
