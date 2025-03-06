@@ -20,7 +20,8 @@ export async function getAllPendingTasks() {
     .from(tasks)
     .where(
       and(eq(tasks.userId, session.user.id), not(eq(tasks.status, "done"))),
-    );
+    )
+    .orderBy(tasks.dueDate);
 
   return {
     userTasks,
