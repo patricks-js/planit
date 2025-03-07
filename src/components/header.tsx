@@ -1,11 +1,13 @@
-import { Badge } from "@/components/ui/badge";
-import { auth } from "@/lib/auth";
 import type { Session, User } from "better-auth";
 import { Feather } from "lucide-react";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+
+import { Badge } from "@/components/ui/badge";
+import { auth } from "@/lib/auth";
 import { ProfileMenu } from "./profile-menu";
+import { ThemeSwitcher } from "./theme-switcher";
 import { Skeleton } from "./ui/skeleton";
 
 type AuthSession = {
@@ -41,6 +43,7 @@ export async function Header() {
       </Link>
       <div className="flex items-center gap-4">
         {/* TODO: Notification  */}
+        <ThemeSwitcher />
         <SessionAwareProfile sessionPromise={sessionPromise} />
       </div>
     </header>
