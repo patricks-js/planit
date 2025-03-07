@@ -50,13 +50,22 @@ export async function ProfileMenu({ userInfo }: ProfileMenuProps) {
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel className="flex min-w-0 flex-col">
-          <span className="truncate font-medium text-foreground text-sm">
-            {userInfo.name}
-          </span>
-          <span className="truncate font-normal text-muted-foreground text-xs">
-            {userInfo.email}
-          </span>
+        <DropdownMenuLabel className="flex min-w-0 items-center gap-2">
+          <div className="w-fit rounded-full bg-secondary p-2">
+            <UserRoundIcon
+              size={16}
+              className="opacity-60"
+              aria-hidden="true"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="truncate font-medium text-foreground text-sm">
+              {userInfo.name}
+            </span>
+            <span className="truncate font-normal text-muted-foreground text-xs">
+              {userInfo.email}
+            </span>
+          </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -66,7 +75,7 @@ export async function ProfileMenu({ userInfo }: ProfileMenuProps) {
               className="opacity-60"
               aria-hidden="true"
             />
-            <span>Settings</span>
+            <span>Configurações</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <ChartNetwork

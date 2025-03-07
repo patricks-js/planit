@@ -22,7 +22,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     <html lang="pt-BR">
       <body
         className={cn(
-          "relative min-h-screen w-screen overflow-hidden font-sans antialiased",
+          "relative min-h-screen w-screen overflow-x-hidden font-sans antialiased",
           geistSans.variable,
         )}
       >
