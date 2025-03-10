@@ -9,7 +9,7 @@ import { zfd } from "zod-form-data";
 
 const schema = zfd.formData({
   title: zfd.text(z.string().min(3)),
-  description: zfd.text(z.coerce.string()).optional(),
+  description: zfd.text(z.coerce.string().optional()),
   dueDate: zfd.text(z.coerce.date()),
 });
 
@@ -22,8 +22,8 @@ export const createTaskAction = authActionClient
       .insert(tasks)
       .values({
         title,
-        description: description,
-        dueDate: dueDate,
+        description,
+        dueDate,
         userId: ctx.userId,
       })
       .returning({
