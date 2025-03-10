@@ -1,4 +1,4 @@
-import { getSessionCookie } from "better-auth";
+import { getSessionCookie } from "better-auth/cookies";
 import { type NextRequest, NextResponse } from "next/server";
 import { createRouteMatcher } from "./lib/utils";
 
