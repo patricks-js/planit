@@ -34,13 +34,20 @@ export function TaskListItem({ task }: TaskListItemProps) {
   }
 
   return (
-    <div className="flex items-center gap-4 px-4 py-2">
+    <div className="flex items-start gap-4 px-4 py-2">
       <Checkbox
         checked={checked}
         onCheckedChange={handleComplete}
         className="size-4 md:size-5"
       />
-      <h4 className="font-medium leading-tight">{task.title}</h4>
+      <div className="grid grow gap-1">
+        <h4 className="font-medium leading-tight">{task.title}</h4>
+        {task.description && (
+          <p className="line-clamp-1 max-w-lg text-muted-foreground text-xs">
+            {task.description}
+          </p>
+        )}
+      </div>
       <div className="ml-auto">
         {task.dueDate && (
           <DueDateBadge
