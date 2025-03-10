@@ -15,7 +15,7 @@ export default function DashboardLayout({
   return (
     <>
       <Header />
-      <main className="h-dvh">
+      <main className="h-full">
         <Submenu />
         {children}
       </main>

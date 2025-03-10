@@ -19,7 +19,7 @@ type SessionAware = {
   sessionPromise: Promise<AuthSession>;
 };
 
-const LOGO_SIZE = 24;
+const LOGO_SIZE = 32;
 
 export async function Header() {
   const sessionPromise = auth.api.getSession({
@@ -28,19 +28,18 @@ export async function Header() {
 
   return (
     <header className="flex items-center justify-between bg-card px-6 pt-4 pb-2">
-      <Link
-        href="/"
-        className="flex items-center gap-2"
-      >
-        <Image
-          src="/logo.svg"
-          alt="logo"
-          width={LOGO_SIZE}
-          height={LOGO_SIZE}
-        />
-
+      <div className="flex items-center gap-4">
+        <Link href="/">
+          <Image
+            src="/logo.svg"
+            alt="logo"
+            width={LOGO_SIZE}
+            height={LOGO_SIZE}
+          />
+        </Link>
+        <div className="h-5 w-px rotate-12 bg-muted-foreground/40" />
         <SessionAwareTitle sessionPromise={sessionPromise} />
-      </Link>
+      </div>
       <div className="flex items-center gap-4">
         {/* TODO: Notification  */}
         <ThemeSwitcher />
@@ -58,7 +57,7 @@ async function SessionAwareTitle({ sessionPromise }: SessionAware) {
   }
 
   return (
-    <>
+    <div className="flex items-center gap-2">
       <h3 className="font-medium text-sm tracking-tight">
         {session.user.name}'s workspace
       </h3>
@@ -71,9 +70,9 @@ async function SessionAwareTitle({ sessionPromise }: SessionAware) {
           size={12}
           aria-hidden="true"
         />
-        Free plan
+        Plano Grátis
       </Badge>
-    </>
+    </div>
   );
 }
 
