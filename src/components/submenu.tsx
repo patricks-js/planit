@@ -11,21 +11,22 @@ const menuNavigation = [
     path: "/inbox",
   },
   {
-    label: "Today",
+    label: "Hoje",
     path: "/today",
   },
   {
-    label: "Someday",
+    label: "Algum dia",
     path: "/someday",
   },
   {
-    label: "Completed",
+    label: "Completas",
     path: "/completed",
   },
-  {
-    label: "Projects",
-    path: "/projects",
-  },
+  // * Feature
+  // {
+  //   label: "Projects",
+  //   path: "/projects",
+  // },
 ];
 
 export default function Submenu() {

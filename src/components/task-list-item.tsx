@@ -1,14 +1,12 @@
 "use client";
 
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
-import { CalendarDays } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { toast } from "sonner";
 
 import { markAsComplete } from "@/app/actions/mark-as-complete";
 import type { TSelectTaskSchema } from "@/db/schema";
+import { DueDateBadge } from "./due-date-badge";
 import { Checkbox } from "./ui/checkbox";
 
 type TaskListItemProps = {
@@ -42,20 +40,14 @@ export function TaskListItem({ task }: TaskListItemProps) {
         onCheckedChange={handleComplete}
         className="size-4 md:size-5"
       />
-      <div className="grid gap-2">
-        <h4 className="font-medium leading-tight">{task.title}</h4>
-        <div className="flex items-center gap-2 text-muted-foreground text-sm">
-          {task.description && (
-            <p className="line-clamp-1">{task.description}</p>
-          )}
-          {task.dueDate && task.description ? <span>•</span> : null}
-          {task.dueDate && (
-            <span className="inline-flex shrink-0 items-center gap-1">
-              <CalendarDays className="size-4 opacity-80" />
-              <span>{format(task.dueDate, "PP", { locale: ptBR })}</span>
-            </span>
-          )}
-        </div>
+      <h4 className="font-medium leading-tight">{task.title}</h4>
+      <div className="ml-auto">
+        {task.dueDate && (
+          <DueDateBadge
+            dueDate={task.dueDate}
+            completed={task.status === "done"}
+          />
+        )}
       </div>
     </div>
   );
