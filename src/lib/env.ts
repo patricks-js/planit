@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-const envSchema = z.object({});
-
 import { createEnv } from "@t3-oss/env-nextjs";
 
 export const env = createEnv({
