@@ -3,7 +3,7 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -16,10 +16,12 @@ import { cn } from "@/lib/utils";
 
 type DatePickerProps = {
   name: string;
+  defaultValue?: Date;
 };
 
-export function DatePicker({ name }: DatePickerProps) {
-  const [date, setDate] = useState<Date | undefined>(undefined);
+export function DatePicker({ name, defaultValue }: DatePickerProps) {
+  const id = useId();
+  const [date, setDate] = useState<Date | undefined>(defaultValue);
 
   return (
     <>
@@ -33,26 +35,35 @@ export function DatePicker({ name }: DatePickerProps) {
       <Popover modal={true}>
         <PopoverTrigger asChild>
           <Button
+            id={id}
             variant={"outline"}
             className={cn(
-              "w-full justify-start text-left font-normal",
+              "group w-full justify-start border-input bg-background px-3 font-normal outline-none outline-offset-0 hover:bg-background focus-visible:outline-[3px]",
               !date && "text-muted-foreground",
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            {date ? (
-              format(date, "PPP", { locale: ptBR })
-            ) : (
-              <span>Selecione uma data</span>
-            )}
+            <CalendarIcon
+              size={16}
+              className="shrink-0 text-muted-foreground/80 transition-colors group-hover:text-foreground"
+              aria-hidden="true"
+            />
+            <span className={cn("truncate", !date && "text-muted-foreground")}>
+              {date ? (
+                format(date, "PPP", { locale: ptBR })
+              ) : (
+                <span>Selecione uma data</span>
+              )}
+            </span>
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="z-50 w-auto p-0">
+        <PopoverContent
+          className="w-auto p-2"
+          align="start"
+        >
           <Calendar
             mode="single"
             selected={date}
             onSelect={setDate}
-            initialFocus
           />
         </PopoverContent>
       </Popover>
