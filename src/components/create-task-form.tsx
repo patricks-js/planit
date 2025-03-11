@@ -11,6 +11,8 @@ import {
   DialogClose,
   DialogContent,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
 import { Input } from "./ui/input";
@@ -29,9 +31,12 @@ export function CreateTaskForm() {
         </Button>
       </DialogTrigger>
       <DialogContent className="p-4">
+        <DialogHeader>
+          <DialogTitle className="sr-only">Nova tarefa</DialogTitle>
+        </DialogHeader>
         <form
           action={execute}
-          className="space-y-5 p-4"
+          className="space-y-5 px-4 pb-2"
         >
           <div className="space-y-2">
             <Label htmlFor="title">Título</Label>
