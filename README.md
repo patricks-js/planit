@@ -99,7 +99,7 @@ Here is what you need to be able to run Planit locally:
 
 5. Open your browser and navigate to `http://localhost:3000`
 
-## Roadmap
+## Roadmap (MVP)
 
 - [ ] User authentication
   - [x] OAuth social sign-in
